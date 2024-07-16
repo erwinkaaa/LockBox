@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import dev.olshevski.navigation.reimagined.AnimatedNavHost
 import dev.olshevski.navigation.reimagined.NavBackHandler
+import id.wendei.lockbox.feature.main.MainScreen
 import id.wendei.lockbox.feature.pin.PinScreen
 import id.wendei.lockbox.feature.splash.SplashScreen
 
@@ -33,7 +34,7 @@ fun AppNavigation() {
             }
 
             is AppDestination.Main -> {
-
+                MainScreen()
             }
         }
     }
