@@ -13,7 +13,7 @@ kotlinXSerializationJson = "1.7.0"
 kotlinXCoroutines = "1.9.0-RC"
 org-jetbrains-kotlin-plugin-serialization = "2.0.0"
 sqldelight = "2.0.2"
-navigation = "2.8.0-beta05"
+reimagined = "1.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,10 +36,9 @@ koin-core-android = { module = "io.insert-koin:koin-android", version.ref = "koi
 koin-core-coroutines = { module = "io.insert-koin:koin-core-coroutines", version.ref = "koin" }
 kotlin-serializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinXSerializationJson" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinXCoroutines" }
+reimagined = { module = "dev.olshevski.navigation:reimagined", version.ref = "reimagined" }
 sqldelight-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
-androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -6,7 +6,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavHostController
+import dev.olshevski.navigation.reimagined.NavController
+import id.wendei.lockbox.core.navigation.AppDestination
 import id.wendei.lockbox.core.navigation.LocalNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +16,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 inline fun <reified ViewModel : BaseViewModel<State, Event, Intent>, State, Event, Intent> ScreenWrapper(
     viewModel: ViewModel = koinViewModel(),
-    crossinline events: (Flow<Event>, CoroutineScope, NavHostController) -> Unit,
+    crossinline events: (Flow<Event>, CoroutineScope, NavController<AppDestination>) -> Unit,
     crossinline content: @Composable (viewModel: ViewModel, state: State) -> Unit,
 ) {
     val navController = LocalNavController.current

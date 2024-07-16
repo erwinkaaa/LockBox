@@ -1,25 +1,40 @@
 package id.wendei.lockbox.core.navigation
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import androidx.compose.runtime.LaunchedEffect
+import dev.olshevski.navigation.reimagined.AnimatedNavHost
+import dev.olshevski.navigation.reimagined.NavBackHandler
+import id.wendei.lockbox.feature.pin.PinScreen
 import id.wendei.lockbox.feature.splash.SplashScreen
 
+@SuppressLint("RestrictedApi")
 @Composable
 fun AppNavigation() {
     val navController = LocalNavController.current
-    NavHost(
-        navController = navController,
-        startDestination = AppRoutes.Splash,
-    ) {
-        composable<AppRoutes.Splash> {
-            SplashScreen()
-        }
-        composable<AppRoutes.Pin> {
 
-        }
-        composable<AppRoutes.Main> {
+    LaunchedEffect(key1 = navController.backstack) {
+        println(navController.backstack.entries)
+    }
 
+    NavBackHandler(navController)
+
+    AnimatedNavHost(navController) { destination ->
+        when (destination) {
+            is AppDestination.Splash -> {
+                SplashScreen()
+            }
+
+            is AppDestination.Pin -> {
+                PinScreen(
+                    pin = destination.pin,
+                    type = destination.type
+                )
+            }
+
+            is AppDestination.Main -> {
+
+            }
         }
     }
 }

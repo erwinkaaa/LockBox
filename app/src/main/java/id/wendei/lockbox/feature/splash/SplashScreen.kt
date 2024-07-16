@@ -18,9 +18,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import dev.olshevski.navigation.reimagined.replaceAll
 import id.wendei.lockbox.R
-import id.wendei.lockbox.core.navigation.AppRoutes
-import id.wendei.lockbox.core.navigation.replace
+import id.wendei.lockbox.core.navigation.AppDestination
 import id.wendei.lockbox.core.util.ScreenWrapper
 import kotlinx.coroutines.launch
 
@@ -32,7 +32,7 @@ fun SplashScreen() {
                 events.collect { event ->
                     when (event) {
                         is SplashEvent.NavigateToPin ->
-                            navController.replace(AppRoutes.Pin)
+                            navController.replaceAll(AppDestination.Pin(type = event.type))
                     }
                 }
             }

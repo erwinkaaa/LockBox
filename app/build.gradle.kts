@@ -59,6 +59,7 @@ dependencies {
     androidX()
     koin()
     kotlin()
+    ui()
     sqlDelight()
     test()
 }
@@ -72,8 +73,6 @@ fun DependencyHandlerScope.androidX() {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.navigation.runtime.ktx)
 }
 
 fun DependencyHandlerScope.koin() {
@@ -86,6 +85,10 @@ fun DependencyHandlerScope.koin() {
 fun DependencyHandlerScope.kotlin() {
     implementation(libs.kotlin.serializationJson)
     implementation(libs.kotlin.coroutines.core)
+}
+
+fun DependencyHandlerScope.ui() {
+    implementation(libs.reimagined)
 }
 
 fun DependencyHandlerScope.sqlDelight() {
