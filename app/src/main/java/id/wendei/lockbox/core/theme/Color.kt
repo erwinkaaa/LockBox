@@ -1,4 +1,4 @@
-package id.wendei.lockbox.ui.theme
+package id.wendei.lockbox.core.theme
 
 import androidx.compose.ui.graphics.Color
 

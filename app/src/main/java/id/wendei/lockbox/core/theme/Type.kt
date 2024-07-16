@@ -1,4 +1,4 @@
-package id.wendei.lockbox.ui.theme
+package id.wendei.lockbox.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
