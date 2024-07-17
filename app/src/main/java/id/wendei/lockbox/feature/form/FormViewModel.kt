@@ -43,6 +43,8 @@ class FormViewModel : BaseViewModel<FormState, FormEvent, FormIntent>(FormState(
                 )
             }
 
+            is FormIntent.Back -> sendEvent(FormEvent.Back)
+
             is FormIntent.Submit -> viewModelScope.launch {
                 when (currentState.type) {
                     FormScreenType.Add -> {

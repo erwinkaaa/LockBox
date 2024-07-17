@@ -12,5 +12,6 @@ sealed class FormIntent {
     data class UpdateCredential(val data: String) : FormIntent()
     data class UpdatePassword(val data: String) : FormIntent()
 
+    data object Back : FormIntent()
     data object Submit : FormIntent()
 }
