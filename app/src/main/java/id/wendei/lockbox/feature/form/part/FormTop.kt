@@ -64,9 +64,9 @@ fun FormTop(
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = when (state.type) {
-                    is FormScreenType.Add -> "Add"
-                    is FormScreenType.Edit -> "Edit"
-                    is FormScreenType.Undefined -> "Undefined"
+                    FormScreenType.Add -> "Add"
+                    FormScreenType.Edit -> "Edit"
+                    FormScreenType.Undefined -> "Undefined"
                 },
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp

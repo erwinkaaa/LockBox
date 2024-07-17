@@ -45,7 +45,7 @@ class FormViewModel : BaseViewModel<FormState, FormEvent, FormIntent>(FormState(
 
             is FormIntent.Submit -> viewModelScope.launch {
                 when (currentState.type) {
-                    is FormScreenType.Add -> {
+                    FormScreenType.Add -> {
                         insertPasswordUseCase.invoke(
                             password = Password(
                                 title = currentState.title,
@@ -56,7 +56,7 @@ class FormViewModel : BaseViewModel<FormState, FormEvent, FormIntent>(FormState(
                         sendEvent(FormEvent.Back)
                     }
 
-                    is FormScreenType.Edit -> {
+                    FormScreenType.Edit -> {
                         updatePasswordUseCase.invoke(
                             password = Password(
                                 id =  currentState.id,
@@ -68,7 +68,7 @@ class FormViewModel : BaseViewModel<FormState, FormEvent, FormIntent>(FormState(
                         sendEvent(FormEvent.Back)
                     }
 
-                    is FormScreenType.Undefined -> {
+                    FormScreenType.Undefined -> {
 
                     }
                 }
