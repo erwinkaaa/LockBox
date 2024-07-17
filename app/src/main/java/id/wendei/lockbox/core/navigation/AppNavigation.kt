@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import dev.olshevski.navigation.reimagined.AnimatedNavHost
 import dev.olshevski.navigation.reimagined.NavBackHandler
+import id.wendei.lockbox.BuildConfig
 import id.wendei.lockbox.feature.main.MainScreen
 import id.wendei.lockbox.feature.pin.PinScreen
 import id.wendei.lockbox.feature.splash.SplashScreen
@@ -14,8 +15,10 @@ import id.wendei.lockbox.feature.splash.SplashScreen
 fun AppNavigation() {
     val navController = LocalNavController.current
 
-    LaunchedEffect(key1 = navController.backstack) {
-        println(navController.backstack.entries)
+    if (BuildConfig.DEBUG) {
+        LaunchedEffect(key1 = navController.backstack) {
+            println(navController.backstack.entries)
+        }
     }
 
     NavBackHandler(navController)

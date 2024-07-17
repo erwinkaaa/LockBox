@@ -4,9 +4,10 @@ import org.koin.dsl.module
 
 val appModule = module {
     includes(
-//        localStorageModule,
-//        repositoryModule,
-//        useCaseModule,
+        localStorageModule,
+        localDataSourceModule,
+        repositoryModule,
+        useCaseModule,
         viewModelModule
     )
 }

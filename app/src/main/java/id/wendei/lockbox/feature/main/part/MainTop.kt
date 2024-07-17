@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import id.wendei.lockbox.R
 
 @Composable
-fun MainTop(modifier: Modifier = Modifier) {
+fun MainTop() {
     Card(
         shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),
         colors = CardDefaults.cardColors(
