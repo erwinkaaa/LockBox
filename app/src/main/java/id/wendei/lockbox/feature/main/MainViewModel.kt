@@ -26,6 +26,9 @@ class MainViewModel: BaseViewModel<MainState, MainEvent, MainIntent>(MainState()
                 delay(2.seconds)
                 setState { it.copy(showSnackBar = false) }
             }
+
+            is MainIntent.NavigateToForm ->
+                sendEvent(MainEvent.NavigateToForm)
         }
     }
 

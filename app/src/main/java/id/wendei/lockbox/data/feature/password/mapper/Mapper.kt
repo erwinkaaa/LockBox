@@ -7,11 +7,11 @@ fun List<PasswordEntity>?.mapToListPassword(): List<Password> {
     return this?.map { it.toPassword() } ?: emptyList()
 }
 
-private fun PasswordEntity.toPassword(): Password {
+fun PasswordEntity?.toPassword(): Password {
     return Password(
-        id = id,
-        title = title,
-        credential = credential,
-        password = password
+        id = this?.id ?: 0,
+        title = this?.title.orEmpty(),
+        credential = this?.credential.orEmpty(),
+        password = this?.password.orEmpty()
     )
 }

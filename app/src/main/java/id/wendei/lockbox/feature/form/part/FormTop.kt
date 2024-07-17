@@ -1,4 +1,4 @@
-package id.wendei.lockbox.feature.main.part
+package id.wendei.lockbox.feature.form.part
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Create
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,11 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import id.wendei.lockbox.R
 import id.wendei.lockbox.core.composable.noRippleClickable
-import id.wendei.lockbox.feature.main.MainIntent
+import id.wendei.lockbox.feature.form.FormIntent
+import id.wendei.lockbox.feature.form.FormScreenType
+import id.wendei.lockbox.feature.form.FormState
 
 @Composable
-fun MainTop(
-    onIntent: (MainIntent) -> Unit
+fun FormTop(
+    state: FormState,
+    onIntent: (FormIntent) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),
@@ -57,21 +61,26 @@ fun MainTop(
                 contentDescription = null,
                 contentScale = ContentScale.FillBounds
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = stringResource(id = R.string.app_name),
+                text = when (state.type) {
+                    is FormScreenType.Add -> "Add"
+                    is FormScreenType.Edit -> "Edit"
+                    is FormScreenType.Undefined -> "Undefined"
+                },
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp
             )
+            Spacer(modifier = Modifier.width(16.dp))
             Spacer(modifier = Modifier.weight(1f))
             Image(
                 modifier = Modifier
                     .noRippleClickable(
                         onClick = {
-                            onIntent.invoke(MainIntent.NavigateToForm)
+                            onIntent.invoke(FormIntent.Submit)
                         }
                     ),
-                imageVector = Icons.Rounded.Create,
+                imageVector = Icons.Rounded.Check,
                 contentDescription = null
             )
             Spacer(modifier = Modifier.width(16.dp))
@@ -87,7 +96,8 @@ private fun MainTopPreview() {
             .fillMaxSize()
             .background(color = Color.White)
     ) {
-        MainTop(
+        FormTop(
+            state = FormState(),
             onIntent = {
 
             }

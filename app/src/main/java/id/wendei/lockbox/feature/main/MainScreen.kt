@@ -18,6 +18,7 @@ import dev.olshevski.navigation.reimagined.navigate
 import id.wendei.lockbox.core.navigation.AppDestination
 import id.wendei.lockbox.core.util.ScreenWrapper
 import id.wendei.lockbox.domain.feature.password.model.Password
+import id.wendei.lockbox.feature.form.FormScreenType
 import id.wendei.lockbox.feature.main.part.MainContent
 import id.wendei.lockbox.feature.main.part.MainTop
 import kotlinx.coroutines.launch
@@ -29,6 +30,14 @@ fun MainScreen() {
             scope.launch {
                 events.collect { event ->
                     when (event) {
+                        is MainEvent.NavigateToForm ->
+                            navController.navigate(
+                                AppDestination.Form(
+                                    type = FormScreenType.Add,
+                                    password = Password()
+                                )
+                            )
+
                         is MainEvent.GoToDetail ->
                             navController.navigate(AppDestination.Main)
                     }
@@ -48,7 +57,7 @@ fun MainScreen() {
 }
 
 @Composable
-fun MainView(
+private fun MainView(
     state: MainState,
     onIntent: (MainIntent) -> Unit
 ) {
@@ -70,7 +79,9 @@ fun MainView(
                 .fillMaxSize()
                 .background(color = Color.White)
         ) {
-            MainTop()
+            MainTop(
+                onIntent = onIntent
+            )
             MainContent(
                 state = state,
                 onIntent = onIntent

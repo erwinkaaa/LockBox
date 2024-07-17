@@ -1,5 +1,6 @@
 package id.wendei.lockbox.di
 
+import id.wendei.lockbox.feature.form.FormViewModel
 import id.wendei.lockbox.feature.main.MainViewModel
 import id.wendei.lockbox.feature.pin.PinViewModel
 import id.wendei.lockbox.feature.splash.SplashViewModel
@@ -10,4 +11,5 @@ val viewModelModule = module {
     viewModelOf(::SplashViewModel)
     viewModelOf(::PinViewModel)
     viewModelOf(::MainViewModel)
+    viewModelOf(::FormViewModel)
 }
