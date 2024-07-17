@@ -5,8 +5,18 @@ import android.content.SharedPreferences
 
 object PreferenceHelper {
 
+    private const val PIN_KEY = "PIN_KEY"
+
     fun defaultPrefs(context: Context): SharedPreferences =
         context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
+
+    fun SharedPreferences.setPin(pin: String) {
+        set(PIN_KEY, pin)
+    }
+
+    fun SharedPreferences.getPin(): String {
+        return get(PIN_KEY, "")
+    }
 
     fun SharedPreferences.clearSession() {
 

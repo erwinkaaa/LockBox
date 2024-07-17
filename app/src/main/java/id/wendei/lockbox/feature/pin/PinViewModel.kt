@@ -1,16 +1,37 @@
 package id.wendei.lockbox.feature.pin
 
 import id.wendei.lockbox.core.util.BaseViewModel
+import id.wendei.lockbox.domain.feature.auth.usecase.GetPinUseCase
+import id.wendei.lockbox.domain.feature.auth.usecase.SetPinUseCase
+import id.wendei.lockbox.domain.utility.DomainResult
+import org.koin.core.component.inject
 
 class PinViewModel : BaseViewModel<PinState, PinEvent, PinIntent>(PinState()) {
 
+    private val getPinUseCase: GetPinUseCase by inject()
+    private val setPinUseCase: SetPinUseCase by inject()
+
     override fun onIntent(intent: PinIntent) {
         when (intent) {
-            is PinIntent.Init -> setState {
-                it.copy(
-                    type = intent.type,
-                    pinToConfirm = intent.pin
-                )
+            is PinIntent.Init -> {
+                setState {
+                    it.copy(
+                        type = intent.type,
+                        pinToConfirm = intent.pin
+                    )
+                }
+
+                if (currentState.type == PinScreenType.Verify) {
+                    when (val result = getPinUseCase.invoke()) {
+                        is DomainResult.Success -> {
+                            setState {
+                                it.copy(pinToConfirm = result.data)
+                            }
+                        }
+
+                        is DomainResult.Error -> {}
+                    }
+                }
             }
 
             is PinIntent.Back -> sendEvent(PinEvent.Back)
@@ -40,13 +61,15 @@ class PinViewModel : BaseViewModel<PinState, PinEvent, PinIntent>(PinState()) {
 
             is PinIntent.Submit -> {
                 when (currentState.type) {
-                    PinScreenType.Register -> {
+                    PinScreenType.Register ->
                         sendEvent(PinEvent.NavigateToConfirmPin(pin = currentState.pin))
-                    }
 
                     PinScreenType.RegisterConfirmation -> {
                         if (currentState.pin == currentState.pinToConfirm) {
-                            sendEvent(PinEvent.NavigateToMain)
+                            when (setPinUseCase.invoke(pin = currentState.pin)) {
+                                is DomainResult.Success -> sendEvent(PinEvent.NavigateToMain)
+                                is DomainResult.Error -> {}
+                            }
                         } else {
                             setState {
                                 it.copy(
@@ -58,8 +81,7 @@ class PinViewModel : BaseViewModel<PinState, PinEvent, PinIntent>(PinState()) {
                     }
 
                     PinScreenType.Verify -> {
-                        val pin = "123456"
-                        if (currentState.pin == pin) {
+                        if (currentState.pin == currentState.pinToConfirm) {
                             sendEvent(PinEvent.NavigateToMain)
                         } else {
                             setState {
