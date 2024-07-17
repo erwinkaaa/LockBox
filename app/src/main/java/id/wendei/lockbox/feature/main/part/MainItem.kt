@@ -1,6 +1,7 @@
 package id.wendei.lockbox.feature.main.part
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +31,7 @@ fun MainItem(
     onCopy: () -> Unit
 ) {
     Card(
+        modifier = Modifier,
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
@@ -39,6 +41,7 @@ fun MainItem(
     ) {
         Row(
             modifier = Modifier
+                .clickable(onClick = onClick)
                 .fillMaxWidth()
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,

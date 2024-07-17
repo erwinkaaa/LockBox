@@ -22,6 +22,9 @@ sealed class AppDestination : Parcelable {
     data object Main : AppDestination()
 
     @Parcelize
+    data class Detail(val password: @RawValue Password) : AppDestination()
+
+    @Parcelize
     data class Form(
         val type: FormScreenType,
         val password: @RawValue Password

@@ -76,11 +76,9 @@ private fun FormView(
 private fun MainPreview() {
     FormView(
         state = FormState(
-            passwordStrength = PasswordStrength(
-                criteriaMet = 1,
-                description = "Weak",
-                color = Color.Red
-            )
+            password = Password(
+                password = "test"
+            ),
         ),
         onIntent = {
 

@@ -39,7 +39,11 @@ fun MainScreen() {
                             )
 
                         is MainEvent.GoToDetail ->
-                            navController.navigate(AppDestination.Main)
+                            navController.navigate(
+                                AppDestination.Detail(
+                                    password = event.password
+                                )
+                            )
                     }
                 }
             }

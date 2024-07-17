@@ -1,12 +1,8 @@
 package id.wendei.lockbox.feature.form
 
-import id.wendei.lockbox.feature.form.part.PasswordStrength
+import id.wendei.lockbox.domain.feature.password.model.Password
 
 data class FormState(
     val type: FormScreenType = FormScreenType.Undefined,
-    val id: Long = 0,
-    val title: String = "",
-    val credential: String = "",
-    val password: String = "",
-    val passwordStrength: PasswordStrength = PasswordStrength()
+    val password: Password = Password()
 )

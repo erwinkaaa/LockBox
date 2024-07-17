@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import dev.olshevski.navigation.reimagined.AnimatedNavHost
 import dev.olshevski.navigation.reimagined.NavBackHandler
 import id.wendei.lockbox.BuildConfig
+import id.wendei.lockbox.feature.detail.DetailScreen
 import id.wendei.lockbox.feature.form.FormScreen
 import id.wendei.lockbox.feature.main.MainScreen
 import id.wendei.lockbox.feature.pin.PinScreen
@@ -39,6 +40,12 @@ fun AppNavigation() {
 
             is AppDestination.Main -> {
                 MainScreen()
+            }
+
+            is AppDestination.Detail -> {
+                DetailScreen(
+                    password = destination.password
+                )
             }
 
             is AppDestination.Form -> {

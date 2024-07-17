@@ -7,13 +7,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import id.wendei.lockbox.feature.form.FormIntent
 import id.wendei.lockbox.feature.form.FormState
@@ -31,7 +33,7 @@ fun FormContent(
     ) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = state.title,
+            value = state.password.title,
             onValueChange = {
                 onIntent.invoke(FormIntent.UpdateTitle(data = it))
             },
@@ -41,11 +43,15 @@ fun FormContent(
             placeholder = {
                 Text(text = "Gmail")
             },
-            maxLines = 1
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions(
+                autoCorrect = false,
+                imeAction = ImeAction.Next
+            )
         )
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = state.credential,
+            value = state.password.credential,
             onValueChange = {
                 onIntent.invoke(FormIntent.UpdateCredential(data = it))
             },
@@ -55,18 +61,26 @@ fun FormContent(
             placeholder = {
                 Text(text = "abcd@gmail.com")
             },
-            maxLines = 1
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions(
+                autoCorrect = false,
+                imeAction = ImeAction.Next
+            )
         )
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = state.password,
+            value = state.password.password,
             onValueChange = {
                 onIntent.invoke(FormIntent.UpdatePassword(data = it))
             },
             label = {
                 Text(text = "Password")
             },
-            maxLines = 1
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions(
+                autoCorrect = false,
+                imeAction = ImeAction.Done
+            )
         )
 
         Column(
@@ -75,9 +89,9 @@ fun FormContent(
         ) {
             Spacer(modifier = Modifier.height(8.dp))
             PasswordStrengthView(
-                description = state.passwordStrength.description,
-                criteriaMet = state.passwordStrength.criteriaMet,
-                color = state.passwordStrength.color
+                description = state.password.passwordStrength.description,
+                criteriaMet = state.password.passwordStrength.criteriaMet,
+                color = state.password.passwordStrength.color
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
