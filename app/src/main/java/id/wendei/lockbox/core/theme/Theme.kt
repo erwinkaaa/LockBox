@@ -8,6 +8,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -32,11 +33,21 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+private val LockBoxScheme = darkColorScheme(
+    primary = Color(0xFF2B2B2B),
+    secondary = Color(0xFF2B2B2B).copy(alpha = 0.5f),
+    tertiary = Color(0xFF2B2B2B).copy(alpha = 0.5f),
+    onBackground = Color(0xFF2B2B2B),
+    background = Color(0xFFF0F0F0),
+    onSurface = Color(0xFF2B2B2B),
+    onSurfaceVariant = Color(0xFF2B2B2B),
+)
+
 @Composable
 fun LockBoxTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -50,7 +61,7 @@ fun LockBoxTheme(
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = LockBoxScheme,
         typography = Typography,
         content = content
     )

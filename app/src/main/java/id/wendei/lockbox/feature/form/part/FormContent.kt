@@ -14,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,6 +47,7 @@ fun FormContent(
             },
             maxLines = 1,
             keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Words,
                 autoCorrect = false,
                 imeAction = ImeAction.Next
             )
@@ -63,6 +66,7 @@ fun FormContent(
             },
             maxLines = 1,
             keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Email,
                 autoCorrect = false,
                 imeAction = ImeAction.Next
             )
