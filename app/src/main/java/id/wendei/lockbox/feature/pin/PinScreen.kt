@@ -2,6 +2,7 @@ package id.wendei.lockbox.feature.pin
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.Text
@@ -19,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -29,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import dev.olshevski.navigation.reimagined.navigate
 import dev.olshevski.navigation.reimagined.replaceAll
 import id.wendei.lockbox.R
+import id.wendei.lockbox.core.composable.ConfirmDialog
 import id.wendei.lockbox.core.composable.noRippleClickable
 import id.wendei.lockbox.core.navigation.AppDestination
 import id.wendei.lockbox.core.util.ScreenWrapper
@@ -78,6 +82,17 @@ fun PinScreen(
                 state = state,
                 onIntent = viewModel::onIntent
             )
+            if (state.showRegisterPopUp) {
+                ConfirmDialog(
+                    title = "Information!",
+                    message = "You can only set this PIN once!\nWe recommend you to use your common PIN.",
+                    confirmText = "",
+                    onConfirm = { },
+                    onClose = {
+                        viewModel.onIntent(PinIntent.ShowRegisterPopUp(show = false))
+                    }
+                )
+            }
         }
     )
 }
@@ -188,9 +203,18 @@ private fun PinPadView(
                     Column(
                         modifier = Modifier
                             .padding(16.dp)
-                            .noRippleClickable(
+                            .clip(CircleShape)
+                            .clickable(
                                 onClick = {
-                                    onInputPin(listNumber[index])
+                                    onInputPin(
+                                        if (index < 10) {
+                                            listNumber[index]
+                                        } else if (index == 10) {
+                                            "0"
+                                        } else {
+                                            ""
+                                        }
+                                    )
                                 },
                                 enabled = index != 9
                             ),

@@ -5,7 +5,8 @@ data class PinState(
     val pin: String = "",
     val pinToConfirm: String = "",
     val isError: Boolean = false,
-    val errorMessage: String = ""
+    val errorMessage: String = "",
+    val showRegisterPopUp: Boolean = false,
 ) {
     val listPin = List(6) { if (it < pin.length) pin[it].toString() else "" }
 }

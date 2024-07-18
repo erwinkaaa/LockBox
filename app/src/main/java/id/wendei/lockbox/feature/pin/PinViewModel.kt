@@ -21,6 +21,10 @@ class PinViewModel : BaseViewModel<PinState, PinEvent, PinIntent>(PinState()) {
                     )
                 }
 
+                if (currentState.type == PinScreenType.Register) {
+                    onIntent(PinIntent.ShowRegisterPopUp(show = true))
+                }
+
                 if (currentState.type == PinScreenType.Verify) {
                     when (val result = getPinUseCase.invoke()) {
                         is DomainResult.Success -> {
@@ -35,6 +39,8 @@ class PinViewModel : BaseViewModel<PinState, PinEvent, PinIntent>(PinState()) {
             }
 
             is PinIntent.Back -> sendEvent(PinEvent.Back)
+
+            is PinIntent.ShowRegisterPopUp -> setState { it.copy(showRegisterPopUp = intent.show) }
 
             is PinIntent.UpdatePin -> {
                 setState {
